@@ -17,8 +17,8 @@ export class EmployeeController {
         return this.employeeService.readAllEmployees();
     }
 
-    @Get(':employee_name' || ':employee_id' || ':cpf' || ':office' || ':situation' )
-    public readOneEmployee(@Param('employee_name' || 'employee_id' || 'cpf' || 'office' || 'situation') params): Employee {
+    @Get(':employee_name' || ':cpf' || ':office' || ':situation' )
+    public readOneEmployee(@Param('employee_name' || 'cpf' || 'office' || 'situation') params): Employee {
         return this.employeeService.readOneEmployee(params);
     }
 
