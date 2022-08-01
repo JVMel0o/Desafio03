@@ -8,9 +8,8 @@ export class EmployeeController {
     constructor(private employeeService: EmployeeService) {}
 
     @Post()
-    public createEmployee(@Body() employee: Employee): string {
-        this.employeeService.createEmployee(employee);
-        return 'Funcionário cadastrado';
+    public createEmployee(@Body() employee: Employee): Employee {
+        return this.employeeService.createEmployee(employee);
     }
 
     @Get()
@@ -18,13 +17,19 @@ export class EmployeeController {
         return this.employeeService.readAllEmployees();
     }
 
+    @Get(':employee_name' || ':employee_id' || ':cpf' || ':office' || ':situation' )
+    public readOneEmployee(@Param('employee_name' || 'employee_id' || 'cpf' || 'office' || 'situation') params): Employee {
+        return this.employeeService.readOneEmployee(params);
+    }
+
     @Put(':employee_id')
-    public updateEmployee(@Body() employee: Employee): Employee {
-        return employee;
+    public updateEmployee(@Param('employee_id') params, @Body() employee: Employee): Employee {
+        return this.employeeService.updateEmployee(params, employee);
     }
 
     @Delete(':employee_id')
-    public deleteEmployee(@Param() params) {
-        this.employeeService.deleteEmployee(params.employee_id);
+    public deleteEmployee(@Param('employee_id') params) {
+        this.employeeService.deleteEmployee(params);
     }
+
 }
